@@ -1,46 +1,37 @@
 import styled from 'styled-components'
-import { Info } from './Info'
+import { Event } from './Event'
+import { timeEvents } from './timeEvents'
 
 const Wrapper = styled.div`
   margin: 0px;
   flex: 1;
   margin-top: 20px;
-  margin-left: 15px;
-  border: solid 1px #f4f4f4;
-  color: palevioletred;
 `
 
-const informacoes = [
-  {
-    offset: 20,
-    data: 1,
-    descricao: 'Nasceu',
-  },
-  {
-    offset: 50,
-    data: 3,
-    descricao: 'Entrou no 1 ano',
-  },
-  {
-    offset: 50,
-    data: 15,
-    descricao: 'Diplomou',
-  },
-  {
-    offset: 200,
-    data: 30,
-    descricao: 'Entrou na Universidade',
-  },
-  {
-    offset: 30,
-    data: 31,
-    descricao: 'Teve netos',
-  },
-]
-export const Timeline = () => (
-  <Wrapper>
-    {informacoes.map((informacao) => (
-      <Info informacao={informacao} />
-    ))}
-  </Wrapper>
-)
+export const Timeline = () => {
+  const initialDate = timeEvents[0].date
+  const finalDate = timeEvents[timeEvents.length - 1].date
+  let actualDate = initialDate
+  const allTimeEvents = []
+  //while (actualDate <= finalDate) {
+  while (actualDate <= finalDate) {
+    const actualTimeEvent = timeEvents.find(
+      (timeEvent) => timeEvent.date == actualDate,
+    )
+    allTimeEvents.push({
+      date: actualDate,
+      description: actualTimeEvent ? actualTimeEvent.description : null,
+    })
+    actualDate++
+  }
+
+  return (
+    <Wrapper>
+      {allTimeEvents.map((timeEvent) => (
+        <span key={timeEvent.date}>
+          <Event timeEvent={timeEvent} />
+        </span>
+      ))}
+    </Wrapper>
+  )
+}
