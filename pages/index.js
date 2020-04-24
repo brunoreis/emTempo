@@ -1,5 +1,8 @@
 import Head from 'next/head'
 import { Timeline } from '../components/Timeline.js'
+const useServiceWorker = process.env.USE_SERVICE_WORKER > 0
+
+// import { Workbox, messageSW } from 'next-pwa'
 
 export default function Home() {
   return (
@@ -17,7 +20,7 @@ export default function Home() {
         <meta name="keywords" content="Keywords" />
         <title>Em Tempo</title>
 
-        <link rel="manifest" href="/manifest.json" />
+        {!!useServiceWorker && <link rel="manifest" href="/manifest.json" />}
         <link
           href="/favicon-16x16.png"
           rel="icon"

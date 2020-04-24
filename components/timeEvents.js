@@ -23,13 +23,13 @@ export const timeEvents = [
     date: 2001,
     description: 'Anna Lua nasceu',
   },
-  // {
-  //   date: 2001,
-  //   description: 'Anna Lua mamou',
-  // },
+  {
+    date: 2001,
+    description: 'Anna Lua mamou',
+  },
   {
     date: 2008,
-    description: 'Maria nasceu',
+    description: 'Maria nasceu e comeu muitos hamburgers.',
   },
   {
     date: 2012,

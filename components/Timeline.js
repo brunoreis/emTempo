@@ -8,22 +8,40 @@ const Wrapper = styled.div`
   margin-top: 20px;
 `
 
-export const Timeline = () => {
+const calculateAllTimeEvents = () => {
   const initialDate = timeEvents[0].date
   const finalDate = timeEvents[timeEvents.length - 1].date
   let actualDate = initialDate
   const allTimeEvents = []
   //while (actualDate <= finalDate) {
   while (actualDate <= finalDate) {
-    const actualTimeEvent = timeEvents.find(
+    const filteredTimeEvents = timeEvents.filter(
       (timeEvent) => timeEvent.date == actualDate,
     )
+    console.log(
+      'calculateAllTimeEvents -> filteredTimeEvents',
+      filteredTimeEvents,
+    )
+
+    let description = ''
+    if (filteredTimeEvents.length > 0) {
+      const descriptions = filteredTimeEvents.map((te) => te.description)
+      description = descriptions.join('. ')
+      console.log('calculateAllTimeEvents -> description', description)
+      //.join(',')
+    }
+
     allTimeEvents.push({
       date: actualDate,
-      description: actualTimeEvent ? actualTimeEvent.description : null,
+      description,
     })
     actualDate++
   }
+  return allTimeEvents
+}
+
+export const Timeline = () => {
+  const allTimeEvents = calculateAllTimeEvents()
 
   return (
     <Wrapper>
